@@ -1,5 +1,4 @@
 import React from "react";
-import Country from "./Country";
 
 function Footer() {
   return (
@@ -8,9 +7,7 @@ function Footer() {
         className=" absolute bottom-0 text-sm
         text-black bg-[#f2f2f2] w-full"
       >
-        <div className="border-b-2 px-8 py-4 ">
-          <Country />
-        </div>
+        <div className="border-b-2 px-8 py-4 ">Sri Lanka</div>
         <div
           className="flex flex-col sm:flex-row justify-between 
              items-center px-4 py-3 sm:px-12 lg:px-10 space-y-7 sm:space-y-0"

@@ -3,11 +3,17 @@ import Link from 'next/link';
 
 export default async function Page({ searchParams }) {
   const startIndex = searchParams.start || '1';
+
   await new Promise((resolve) => setTimeout(resolve, 1000));
-  const response = await fetch(
-    `https://www.googleapis.com/customsearch/v1?key=${process.env.API_KEY}&cx=${process.env.CONTEXT_KEY}&q=${searchParams.searchTerm}'}&searchType=image&start=${startIndex}`
-  );
-  if (!response.ok) throw new Error('Something went wrong');
+
+  const apiUrl = `https://www.googleapis.com/customsearch/v1?key=${process.env.API_KEY}&cx=${process.env.CONTEXT_KEY}&q=${encodeURIComponent(searchParams.searchTerm)}&searchType=image&start=${startIndex}`;
+
+  const response = await fetch(apiUrl);
+
+  if (!response.ok) {
+    throw new Error('Something went wrong');
+  }
+
   const data = await response.json();
   const results = data.items;
 
@@ -27,5 +33,5 @@ export default async function Page({ searchParams }) {
     );
   }
 
-  return <div>{results && <ImageSearchResults results={data} />}</div>;
+  return <div>{results && <ImageSearchResults results={results} />}</div>;
 }
