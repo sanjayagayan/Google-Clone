@@ -26,11 +26,11 @@ function SearchHeader() {
             className="order-1 sm:order-none mb-4 sm:mb-0 hidden sm:flex"
           >
             <Image
+              priority
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1920px-Google_2015_logo.svg.png"
               alt="Google Logo"
               width={120}
               height={100}
-              priority
               className="w-[92px] h-[30px] "
             />
           </Link>

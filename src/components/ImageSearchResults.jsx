@@ -1,6 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import PaginationButtons from "./PaginationButtons";
+import Image from 'next/image'
+
 
 function ImageSearchResults({ results }) {
   return (
@@ -10,10 +12,13 @@ function ImageSearchResults({ results }) {
           <div className="mb-8" key={result.link}>
             <div className="group">
               <Link href={result.image.contextLink}>
-                <img
+                <Image
                   src={result.link}
                   alt={result.title}
                   className="h-52 group-hover:shadow-xl w-full object-contain transition-shadow duration-300"
+                  width={100}
+                  height={100}
+                  priority
                 />
               </Link>
               <Link href={result.image.contextLink}>

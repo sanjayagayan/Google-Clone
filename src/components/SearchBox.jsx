@@ -19,6 +19,13 @@ function SearchBox() {
     router.push(`/search/web?searchTerm=${term}`);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleSubmit(e);
+    }
+  };
+
   return (
     <>
       <form
@@ -37,25 +44,33 @@ function SearchBox() {
           className="w-full focus:outline-none leading-[22px] mb-[4px] px-2"
           value={term}
           onChange={(e) => setTerm(e.target.value)}
+          onFocus={() => setIsInputFocused(true)}
+          onBlur={() => setIsInputFocused(false)}
+          onKeyDown={handleKeyDown}
         />
         <div className="flex flex-row space-x-4 items-center cursor-pointer">
-          <button
-            className=" border-r-2 border-gray-200"
-            onClick={() => setTerm(" ")}
-          >
-            <CloseIcon
-              className=" text-gray-500 cursor-pointer sm:mr-2 mr-2"
+          {searchTerm && (
+              <button
+              className=" border-r-2 border-gray-200"
+              onClick={() => setTerm(" ")}
+            >
+              <CloseIcon
+                className=" text-gray-500 cursor-pointer sm:mr-2 mr-2"
+                width="24px"
+                height="24px"
+              />
+            </button>
+          )}
+          
+          <VoiceIcon width="24px" height="24px" />
+          <ImageIcon width="24px" height="24px" className="hidden sm:flex" />
+          <button onClick={handleSubmit}>
+            <SearchIcon
+              className=" text-[#4285f4] cursor-pointer hidden sm:flex"
               width="24px"
               height="24px"
             />
           </button>
-          <VoiceIcon width="24px" height="24px" />
-          <ImageIcon width="24px" height="24px" className="hidden sm:flex" />
-          <SearchIcon
-            className=" text-[#4285f4] cursor-pointer hidden sm:flex"
-            width="24px"
-            height="24px"
-          />
         </div>
       </form>
     </>

@@ -11,9 +11,8 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className="relative min-h-screen font-sans">
         {children}
-        <Footer/>
+        <Footer />
       </body>
     </html>
   );
 }
-
