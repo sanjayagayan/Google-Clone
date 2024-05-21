@@ -44,13 +44,11 @@ function SearchBox() {
           className="w-full focus:outline-none leading-[22px] mb-[4px] px-2"
           value={term}
           onChange={(e) => setTerm(e.target.value)}
-          onFocus={() => setIsInputFocused(true)}
-          onBlur={() => setIsInputFocused(false)}
           onKeyDown={handleKeyDown}
         />
         <div className="flex flex-row space-x-4 items-center cursor-pointer">
           {searchTerm && (
-              <button
+            <button
               className=" border-r-2 border-gray-200"
               onClick={() => setTerm(" ")}
             >
@@ -61,7 +59,7 @@ function SearchBox() {
               />
             </button>
           )}
-          
+
           <VoiceIcon width="24px" height="24px" />
           <ImageIcon width="24px" height="24px" className="hidden sm:flex" />
           <button onClick={handleSubmit}>

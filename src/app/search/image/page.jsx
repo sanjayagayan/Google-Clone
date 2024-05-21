@@ -2,8 +2,9 @@ import ImageSearchResults from "@/components/ImageSearchResults";
 import Link from "next/link";
 
 export default async function Page({ searchParams }) {
-  const startIndex = searchParams.start || "1";
+  const startIndex = searchParams.start || "3";
   await new Promise((resolve) => setTimeout(resolve, 1000));
+
   const response = await fetch(
     `https://www.googleapis.com/customsearch/v1?key=${process.env.API_KEY}&cx=${process.env.CONTEXT_KEY}&q=${searchParams.searchTerm}&searchType=image&start=${startIndex}`
   );
@@ -13,7 +14,13 @@ export default async function Page({ searchParams }) {
   }
 
   const data = await response.json();
-  const results = data.items;
+
+  const results = await Promise.all(
+    data.items.map(async (item) => {
+      const isValid = await isValidImageUrl(item.link);
+      return isValid ? item : null;
+    })
+  ).then((items) => items.filter((item) => item !== null));
 
   if (!results || results.length === 0) {
     return (
@@ -30,14 +37,26 @@ export default async function Page({ searchParams }) {
       </div>
     );
   }
+
   return (
     <div>
       {results && (
         <ImageSearchResults
-          results={data}
+          results={results}
           onError={() => console.error("Failed to load image")}
         />
       )}
     </div>
   );
+}
+
+async function isValidImageUrl(url) {
+  try {
+    const response = await fetch(url, { method: "HEAD" });
+    const contentType = response.headers.get("Content-Type");
+    return contentType && contentType.startsWith("image/");
+  } catch (error) {
+    console.error(`Error checking image URL: ${url}`, error);
+    return false;
+  }
 }
