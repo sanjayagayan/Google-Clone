@@ -1,8 +1,7 @@
 import ImageSearchResults from "@/components/ImageSearchResults";
 import Link from "next/link";
 
-export default async function Page({ searchParams }) {
-  
+export default async function Page({searchParams}) {
   const startIndex = searchParams.start || "3";
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
@@ -27,7 +26,7 @@ export default async function Page({ searchParams }) {
     return (
       <div className="flex flex-col justify-center items-center pt-10">
         <h1 className="text-3xl mb-4">
-          No results found for {searchParams.searchTerm}
+          No results found for {searchTerm}
         </h1>
         <p className="text-lg">
           Try searching the web or images for something else{" "}

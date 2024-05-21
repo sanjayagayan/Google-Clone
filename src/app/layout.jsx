@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import "./globals.css";
 import Footer from "@/components/Footer";
 
@@ -10,7 +11,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="relative min-h-screen font-sans">
-        {children}
+        <Suspense>
+          {children}
+        </Suspense>
         <Footer />
       </body>
     </html>
