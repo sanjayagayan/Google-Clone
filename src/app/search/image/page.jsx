@@ -2,6 +2,7 @@ import ImageSearchResults from "@/components/ImageSearchResults";
 import Link from "next/link";
 
 export default async function Page({ searchParams }) {
+  
   const startIndex = searchParams.start || "3";
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
