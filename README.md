@@ -1,4 +1,5 @@
 # Google Clone Engine
+![Google Clone](https://github.com/sanjayagayan/Google-Clone/assets/70587308/3576d5fb-7ea1-40d8-99b9-32d21e7237ca)
 
 ## Table of Contents
 - [Overview](#overview)
